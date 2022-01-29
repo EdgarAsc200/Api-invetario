@@ -22,12 +22,31 @@ $uri = explode("/",$_SERVER['REQUEST_URI']);
     if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
 
         $database =  RoutesController::database();
-        $response = getAllColumns($uri[2], $database);
+        $response = PostController::getAllColumns(explode("?",$uri[2])[0], $database);
+        $columns = array();
         
+        foreach ($response as $key => $value) {
+            array_push($columns, $value->item);
+        }
+        array_shift($columns);
+        if(isset($_POST)){
+            $count = 0;
+            foreach(array_keys($_POST) as $key => $value){
+                if($value == $columns[$key]){
+                    $count ++;
+                }
+            }
+           
+            if($count == count($columns)){
+                $response = new PostController();
+                $response -> PostData(explode("?",$uri[2])[0],$_POST);
+            }
+            else{
+                echo "ERROR: No Coinciden los parametros con las columnas de la tabla de la BD";
+            }
+        }
     }
-    if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "PUT"){
-        
-    }
+    
 
 
 

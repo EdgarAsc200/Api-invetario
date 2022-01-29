@@ -7,7 +7,11 @@ header('content-type: application/json; charset=utf-8');
 
 require_once "Controller/route.controller.php";
 require_once "Controller/get.controller.php";
+require_once "Controller/post.controller.php";
+
 require_once "Models/get.model.php";
+require_once "Models/post.model.php";
+
 
 $index = new RoutesController();
 $index->RouteIndex();
