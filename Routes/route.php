@@ -2,7 +2,7 @@
 $uri = explode("/",$_SERVER['REQUEST_URI']);
 
 // 
- if(empty($uri[2])){
+ if(empty($uri[1])){
      $jsonResponse = array(
          "estado" => "404",
          "respuesta " => "No Reponde"
