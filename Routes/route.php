@@ -28,7 +28,7 @@ $uri = explode("/",$_SERVER['REQUEST_URI']);
             $response ->getData($uri[2]);
         } 
     }
-     /* Peticiones POST */
+     /* Peticiones POST fldsjfk */
     if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
 
         $database =  RoutesController::database();
