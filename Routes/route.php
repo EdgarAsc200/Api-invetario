@@ -14,11 +14,21 @@ $uri = explode("/",$_SERVER['REQUEST_URI']);
  else{
     /* Peticiones GET */
     if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "GET"){
-        // Petciones get sin filtro
-        $response = new GetController();
-        $response ->getData($uri[2]);
+        
+        //Petciones con Filtro 
+        if(isset($_GET['LinkTo']) && isset($_GET['EqualTo'])){
+            $response = new GetController();
+            $response->getDataFilter(explode("?",$uri[2])[0],$_GET['LinkTo'],$_GET['EqualTo']);
+           
+        } 
+          // Petciones get sin filtro 
+         else{
+          
+            $response = new GetController();
+            $response ->getData($uri[2]);
+        } 
     }
-    // Peticiones POST
+     /* Peticiones POST */
     if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
 
         $database =  RoutesController::database();

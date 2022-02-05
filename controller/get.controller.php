@@ -9,6 +9,13 @@
             $return ->ResponseData($response, "getData");
         }
 
+        // Petiones a GET con FILTRO
+        public function getDataFilter($table,$linkTo,$EqualTo){
+            $response = GetModel::getDataFilter($table,$linkTo,$EqualTo);
+            $return = new GetController();
+            $return->ResponseData($response,"getDataFilter");
+        }
+
 
         // Funcion de Respuesta de los metodos
         public function ResponseData($response, $method){
@@ -21,7 +28,8 @@
             else{
                 $json = array(
                     "estado" => 404,
-                    "resultado" => "No hay datos para mostrar"
+                    "resultado" => "No hay datos para mostrar",
+                    "method" => $method
                 );
             }
             echo json_encode($json, http_response_code($json['estado']));
