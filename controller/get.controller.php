@@ -1,7 +1,7 @@
 <?php
 
     class GetController{
-
+        // Peticiones GET sin FILTRO
         public function getData($table){
             $response = GetModel::getData($table);
 
@@ -14,6 +14,12 @@
             $response = GetModel::getDataFilter($table,$linkTo,$EqualTo);
             $return = new GetController();
             $return->ResponseData($response,"getDataFilter");
+        }
+        // Peticones GET con tablas RELACIONADAS
+        public function getRelData($table,$rel){
+            $response = GetModel::getRelData($table,$rel);
+            $return = new GetController();
+            $return -> ResponseData($response,"getRelData");
         }
 
 

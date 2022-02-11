@@ -3,7 +3,7 @@
         static public  function connect(){
 
             try{
-                $conexion = new PDO("mysql:dbname=inventario_ti;host=localhost", "root","");
+                $conexion = new PDO("mysql:dbname=blmakaug339z0qpdqlmu;host=blmakaug339z0qpdqlmu-mysql.services.clever-cloud.com", "uooo0iyhmscccwix","lmmdPgyVe2sqg8NLfrZ3");
                 $conexion->exec("set names utf8");
             }catch(PDOException $e){
 
