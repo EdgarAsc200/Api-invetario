@@ -2,7 +2,7 @@
 $uri = explode("/",$_SERVER['REQUEST_URI']);
 
 // 
- if(empty($uri[1])){
+ if(empty($uri[0])){
      $jsonResponse = array(
          "estado" => "404",
          "respuesta " => "No Reponde"
@@ -18,13 +18,13 @@ $uri = explode("/",$_SERVER['REQUEST_URI']);
         // Petciones GET tabla relacionadas
         if(isset($_GET['rel'])){
             $response = new GetController();
-            $response -> getRelData(explode("?",$uri[2])[0],$_GET['rel']);
+            $response -> getRelData(explode("?",$uri[1])[0],$_GET['rel']);
          }
         
         //Petciones con Filtro 
         elseif(isset($_GET['LinkTo']) && isset($_GET['EqualTo'])){
             $response = new GetController();
-            $response->getDataFilter(explode("?",$uri[2])[0],$_GET['LinkTo'],$_GET['EqualTo']);
+            $response->getDataFilter(explode("?",$uri[1])[0],$_GET['LinkTo'],$_GET['EqualTo']);
            
         } 
           // Petciones get sin filtro 
@@ -37,7 +37,7 @@ $uri = explode("/",$_SERVER['REQUEST_URI']);
     if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST"){
 
         $database =  RoutesController::database();
-        $response = PostController::getAllColumns(explode("?",$uri[2])[0], $database);
+        $response = PostController::getAllColumns(explode("?",$uri[1])[0], $database);
         $columns = array();
         
         foreach ($response as $key => $value) {
@@ -54,7 +54,7 @@ $uri = explode("/",$_SERVER['REQUEST_URI']);
            
             if($count == count($columns)){
                 $response = new PostController();
-                $response -> PostData(explode("?",$uri[2])[0],$_POST);
+                $response -> PostData(explode("?",$uri[1])[0],$_POST);
             }
             else{
                 echo "ERROR: No Coinciden los parametros con las columnas de la tabla de la BD";
